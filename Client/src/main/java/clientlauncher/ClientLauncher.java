@@ -7,15 +7,15 @@ import java.net.UnknownHostException;
 
 public class ClientLauncher {
     public static void main(String[] args) {
-        try {
-            InetAddress host = InetAddress.getByName(args[0]);
-            int port = Integer.parseInt(args[1]);
+        //try {
+            //InetAddress host = InetAddress.getByName("a");
+            int port = 11001;
 
-            Client client = new Client(host, port);
+            Client client = new Client(port);
             client.start();
 
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+//        } catch (UnknownHostException e) {
+//            e.printStackTrace();
+//        }
     }
 }
