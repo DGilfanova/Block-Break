@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 public class Resource {
 
-    //private final static String LOAD_APP_VIEW_PATH = "/view/loadApp.fxml";
     private final static String START_VIEW_PATH = "/view/start.fxml";
 
     private static HashMap<String, Scene> scenes = new HashMap<>();

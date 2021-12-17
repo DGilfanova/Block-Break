@@ -6,7 +6,6 @@ public class StartController {
 
     public void startAction(MouseEvent mouseEvent) {
 
-        System.out.println(1);
         //запускаем заставку, избегаем статики
         //Шлем серверу первое сообщение "рукопожатие"
         //Получаем ответ

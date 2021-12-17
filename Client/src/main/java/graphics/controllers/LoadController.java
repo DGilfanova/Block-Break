@@ -43,7 +43,7 @@ public class LoadController {
             }
         }, TASK_DELAY,TASK_PERIOD);
 
-        //ошибка
+        //исправить
         GUI.getStage().setResizable(true);
         GUI.getStage().setScene(Resource.getScenes().get("startView"));
         GUI.getStage().show();
