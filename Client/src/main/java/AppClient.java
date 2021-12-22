@@ -1,17 +1,13 @@
-package clientlauncher;
-
-import client.Client;
-
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class ClientLauncher {
+public class AppClient {
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 11001;
+
     public static void main(String[] args) {
         try {
-            InetAddress host = InetAddress.getByName("a");
-            int port = 11001;
-
-            Client client = new Client(host, port);
+            SocketClient client = new SocketClient(InetAddress.getByName(HOST), PORT);
             client.start();
 
         } catch (UnknownHostException e) {
