@@ -1,9 +1,10 @@
+import com.sun.javafx.application.LauncherImpl;
 import exceptions.ClientException;
-import fertdt.Message;
 import fertdt.MessageReadingException;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
 import graphics.GUI;
+import graphics.controllers.GUIPreloadController;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,7 +35,7 @@ public class SocketClient implements Client{
     }
 
     public void logicStart() {
-        GUI.launch(GUI.class);
+        //как запустить
     }
 
     @Override

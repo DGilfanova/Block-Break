@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.MenuController">
+   <children>
+      <Pane fx:id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0">
+               <image>
+                  <Image url="@../images/loadImage.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="hostGameButton" layoutX="466.0" layoutY="280.0" mnemonicParsing="false" onAction="#hostButtonPressed" prefHeight="44.0" prefWidth="348.0" text="Найти соперника" />
+            <Button fx:id="connectButton" layoutX="466.0" layoutY="338.0" mnemonicParsing="false" onAction="#connectButtonPressed" prefHeight="44.0" prefWidth="348.0" text="Подключиться">
+               <styleClass>
+                  <String fx:value="button" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <TextField fx:id="addressTextField" layoutX="481.0" layoutY="393.0" prefHeight="35.0" prefWidth="320.0" promptText="Введите id" />
+            <Button fx:id="enterButton" layoutX="587.0" layoutY="447.0" mnemonicParsing="false" onAction="#enterButtonPressed" prefHeight="25.0" prefWidth="107.0" text="Войти" />
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="480.0" layoutY="483.0" prefHeight="17.0" prefWidth="320.0" text="Невозможно подключиться к серверу" textFill="#c50202" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
