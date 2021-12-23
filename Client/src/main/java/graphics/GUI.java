@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+
 public class GUI extends Application {
 
     private static Stage stage;
@@ -34,9 +36,4 @@ public class GUI extends Application {
     public static Stage getStage() {
         return stage;
     }
-
-    public static void main(String[] args) {
-        LauncherImpl.launchApplication(GUI.class, GUIPreloadController.class, args);
-    }
-
 }

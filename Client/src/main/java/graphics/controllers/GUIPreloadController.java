@@ -1,11 +1,11 @@
 package graphics.controllers;
 
 import javafx.application.Preloader;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
 
 public class GUIPreloadController extends Preloader {
 

@@ -1,5 +1,6 @@
+package client;
+
 import exceptions.ClientException;
-import fertdt.Message;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
 

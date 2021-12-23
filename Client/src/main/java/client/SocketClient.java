@@ -1,4 +1,6 @@
-import com.sun.javafx.application.LauncherImpl;
+package client;
+
+import client.Client;
 import exceptions.ClientException;
 import fertdt.MessageReadingException;
 import fertdt.RequestMessage;
@@ -14,7 +16,7 @@ import java.net.Socket;
 
 @Getter
 @Setter
-public class SocketClient implements Client{
+public class SocketClient implements Client {
     private final InetAddress host;
     private final int port;
     private Socket socket;
@@ -26,16 +28,17 @@ public class SocketClient implements Client{
 
     @Override
     public void start() throws ClientException {
-        try {
-            socket = new Socket(this.host, this.port);
+//        try {
+//            socket = new Socket(this.host, this.port);
             this.logicStart();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+            //e.printStackTrace();
+        //}
     }
 
     public void logicStart() {
-        //как запустить
+        System.setProperty("javafx.preloader", GUIPreloadController.class.getCanonicalName());
+        GUI.launch(GUI.class);
     }
 
     @Override

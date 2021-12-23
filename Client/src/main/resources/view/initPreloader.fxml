@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="489.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.InitPreloadController">
+
+<AnchorPane prefHeight="720.0" prefWidth="1151.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.InitPreloadController">
    <children>
-      <Pane prefHeight="489.0" prefWidth="800.0">
-          <children>
-              <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                  <image>
-                      <Image url="@../images/loadImage.jpg" />
-                  </image>
-              </ImageView>
-              <Label fx:id="lblLoading" layoutX="26.0" layoutY="390.0" prefHeight="25.0" prefWidth="79.0" text="Loading..." AnchorPane.bottomAnchor="74.60000000000002" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="695.0">
-               <font>
-                  <Font size="15.0" />
-               </font></Label>
-              <ProgressBar layoutX="26.0" layoutY="430.0" prefHeight="18.0" prefWidth="748.0" AnchorPane.bottomAnchor="41.60000000000002" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="26.0" />
-          </children>
-      </Pane>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/loadImage.jpg" />
+         </image>
+      </ImageView>
+      <ProgressBar layoutX="317.0" layoutY="554.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="650.0" />
    </children>
-
 </AnchorPane>
