@@ -1,6 +1,5 @@
 package graphics.entities;
 
-import fertdt.ClientMain;
 import fertdt.entities.Character;
 import fertdt.entities.Field;
 import fertdt.entities.PassiveSkill;
