@@ -1,4 +1,4 @@
-package graphics.entities.elements;
+package models.elements;
 
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -57,9 +57,5 @@ public class Field extends Parent {
 
     public Cell getCell(int x, int y) {
         return (Cell)((HBox)(rows.getChildren().get(y))).getChildren().get(x);
-    }
-
-    //возвращается снова двумерный массив??
-    public void shoot(Character character, int x, int y) {
     }
 }

@@ -1,4 +1,4 @@
-package graphics.entities.characters;
+package models.characters;
 
 import lombok.Getter;
 import lombok.Setter;

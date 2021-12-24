@@ -1,11 +1,11 @@
-package graphics.controllers;
+package controllers;
 
 import javafx.application.Preloader;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.fxml.FXMLLoader;
 
 public class GUIPreloadController extends Preloader {
 
@@ -14,9 +14,8 @@ public class GUIPreloadController extends Preloader {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.preloaderStage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/view/initPreloader.fxml"));
-        //может тут false сделать
-        primaryStage.setResizable(true);
+        Parent root = FXMLLoader.load(getClass().getResource("/views/initPreloader.fxml"));
+        primaryStage.setResizable(false);
         primaryStage.setTitle("Block Break");
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/appIcon.png").toString()));
         Scene scene = new Scene(root);

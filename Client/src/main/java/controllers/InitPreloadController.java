@@ -1,6 +1,6 @@
-package graphics.controllers;
+package controllers;
 
-import graphics.utils.Resource;
+import utils.Resource;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -20,7 +20,6 @@ public class InitPreloadController implements Initializable {
 
     public void checkFunctions(){
 
-        //тут прикол
         final String[] message = {""};
         Thread t1 = new Thread(() -> {
             message[0] = "Loading...";

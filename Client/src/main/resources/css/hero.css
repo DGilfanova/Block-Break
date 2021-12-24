@@ -1,0 +1,44 @@
+.phantom {
+    -fx-background-image: url('/images/phantom.png');
+    -fx-background-size: 100% 100%;
+}
+
+.luna {
+    -fx-background-image: url('/images/luna.png');
+    -fx-background-size: 100% 100%;
+}
+
+.siren {
+    -fx-background-image: url('/images/siren.png');
+    -fx-background-size: 100% 100%;
+}
+
+.brood {
+    -fx-background-image: url('/images/brood.png');
+    -fx-background-size: 100% 100%;
+}
+
+.crosh {
+    -fx-background-image: url('/images/crosh.png');
+    -fx-background-size: 100% 100%;
+}
+
+.pers {
+    -fx-background-image: url('/images/pers.png');
+    -fx-background-size: 100% 100%;
+}
+
+.rat {
+    -fx-background-image: url('/images/rat.png');
+    -fx-background-size: 100% 100%;
+}
+
+.spider {
+    -fx-background-image: url('/images/spider.png');
+    -fx-background-size: 100% 100%;
+}
+
+.anim {
+    -fx-background-image: url('/images/anim.png');
+    -fx-background-size: 100% 100%;
+}

@@ -1,4 +1,4 @@
-package graphics.entities.elements;
+package models.elements;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

@@ -24,7 +24,7 @@
                <font>
                   <Font size="18.0" />
                </font></Button>
-                <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" text="Невозможно подключиться" textFill="RED" visible="false">
+                <Label fx:id="errorLabel" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" text="Введите id комнаты!" textFill="RED" visible="false">
                <font>
                   <Font size="15.0" />
                </font></Label>
