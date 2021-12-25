@@ -1,10 +1,12 @@
 package controllers;
 
+import client.Client;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
 import helpers.constants.Constants;
+import helpers.adapters.StorageAdapter;
+import javafx.application.Platform;
 import utils.Resource;
-import helpers.connectors.SocketClientConnector;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,7 +28,7 @@ public class MenuController {
     @FXML
     private Button enterButton;
     @FXML
-    private Label errorLabel;
+    private static Label errorLabel;
     @FXML
     private TextField addressTextField;
     @FXML
@@ -34,10 +36,10 @@ public class MenuController {
     @FXML
     private VBox vBox;
 
-     static SocketClientConnector connector;
+    private Client client;
 
     public void initialize() {
-        connector = new SocketClientConnector();
+        client = StorageAdapter.client;
     }
 
     @FXML
@@ -47,7 +49,8 @@ public class MenuController {
 
             @Override
             public void handle(MouseEvent event) {
-                handleStartMessage(DEFAULT_ROOM_ID);
+                RequestMessage requestMessage = RequestMessage.createStartRequestMessage(DEFAULT_ROOM_ID);
+                client.sendMessage(requestMessage);
             }
         });
     }
@@ -74,34 +77,8 @@ public class MenuController {
                     return;
                 }
 
-//                Service<Void> service = new Service<Void>() {
-//                    @Override
-//                    protected Task<Void> createTask() {
-//                        return new Task<Void>() {
-//                            @Override
-//                            public Void call() throws InterruptedException {
-//                                final CountDownLatch latch = new CountDownLatch(1);
-//                                Platform.runLater(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        try {
-//                                            controllers.GUI.getStage().setScene(Resource.getScenes().get("menuView"));
-//                                            controllers.GUI.getStage().setResizable(true);
-//                                            controllers.GUI.getStage().show();
-//                                        } finally {
-//                                            latch.countDown();
-//                                        }
-//                                    }
-//                                });
-//                                latch.await();
-//                                return null;
-//                            }
-//                        };
-//                    }
-//                };
-//                service.start();
-
-                handleStartMessage(roomId);
+                RequestMessage requestMessage = RequestMessage.createStartRequestMessage(roomId);
+                client.sendMessage(requestMessage);
             }
         });
     }
@@ -113,21 +90,24 @@ public class MenuController {
         GUI.getStage().show();
     }
 
-    private void handleStartMessage(Integer roomId) {
-        RequestMessage requestMessage = RequestMessage.createStartRequestMessage(roomId);
-        ResponseMessage responseMessage = connector.sendMessage(requestMessage);
-        if (responseMessage.getMessageType() == 1) {
-            System.out.println(responseMessage);
+    public static void handleMessage(ResponseMessage responseMessage) {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                if (responseMessage.getMessageType() == 2) {
+                    System.out.println(responseMessage);
 
-            GUI.getStage().setScene(Resource.getScenes().get(Constants.CHARACTER_SELECTION_RESOURCE_NAME));
-            GUI.getStage().setResizable(true);
-            GUI.getStage().show();
-        } else {
-            fail("Проблемы с сервером! Попробуйте снова");
-        }
+                    GUI.getStage().setScene(Resource.getScenes().get(Constants.CHARACTER_SELECTION_RESOURCE_NAME));
+                    GUI.getStage().setResizable(true);
+                    GUI.getStage().show();
+                } else {
+                    fail("Проблемы с сервером! Попробуйте снова");
+                }
+            }
+        });
     }
 
-    private void fail(String errorText) {
+    private static void fail(String errorText) {
         errorLabel.setText(errorText);
         errorLabel.setVisible(true);
     }

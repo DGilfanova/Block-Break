@@ -1,5 +1,6 @@
 package controllers;
 
+import com.sun.javafx.application.LauncherImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,5 +31,9 @@ public class GUI extends Application {
 
     public static Stage getStage() {
         return stage;
+    }
+
+    public static void main(String[] args) {
+        LauncherImpl.launchApplication(GUI.class, GUIPreloadController.class, args);
     }
 }

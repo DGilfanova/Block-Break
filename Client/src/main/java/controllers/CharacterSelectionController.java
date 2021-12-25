@@ -1,12 +1,13 @@
 package controllers;
 
-import helpers.connectors.ClientConnector;
+import client.Client;
+import fertdt.ResponseMessage;
+import helpers.adapters.StorageAdapter;
 import utils.Resource;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -33,15 +34,12 @@ public class CharacterSelectionController {
     //добавляешь в arraylist и передаешь в след сцену, где уже выбираешь скиллы
     //в методах проверяешь длину листа
     //private ArrayList<> heroes;
+    private Client client;
 
-    ClientConnector connector;
-
-    @FXML
     public void initialize() {
-        connector = MenuController.connector;
+        client = StorageAdapter.client;
     }
 
-    //исправить так, чтобы передавались все кнопки
     @FXML
     private void croshDoubleMouseClicked(MouseEvent mouseEvent) {
         getButton(croshButton);
@@ -72,20 +70,20 @@ public class CharacterSelectionController {
     }
 
     private void getButton(Button button) {
-        button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        button.setOnMouseExited(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-                    if(mouseEvent.getClickCount() == 2){
-                        DialogController dialogController = new DialogController();
-                        try {
-                            dialogController.start(new Stage());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                DialogController dialogController = new DialogController();
+                try {
+                    dialogController.start(new Stage());
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
+    }
+
+    public static void handleMessage(ResponseMessage responseMessage) {
+
     }
 }

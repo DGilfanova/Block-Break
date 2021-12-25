@@ -70,6 +70,5 @@ public class InitPreloadController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }

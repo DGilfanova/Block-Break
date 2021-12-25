@@ -16,7 +16,7 @@ public class DialogController extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/view/dialog.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/dialog.fxml"));
         primaryStage.setTitle("Block Break");
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/appIcon.png").toString()));
         primaryStage.setResizable(false);
