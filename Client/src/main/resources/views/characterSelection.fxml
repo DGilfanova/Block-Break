@@ -10,58 +10,42 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.RadioButton?>
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="bodybg2" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.CharacterSelectionController">
    <children>
       <VBox alignment="CENTER" layoutX="-14.0" prefHeight="400.0" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="30.0">
          <children>
+            <Label text="Выберите трех персонажей" textFill="white" visible="true">
+               <font>
+                  <Font size="40.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" left="20.0" right="20.0" top="50.0" />
+               </padding>
+            </Label>
             <ScrollPane hbarPolicy="ALWAYS" pannable="true" prefHeight="140.0" prefWidth="880.0" stylesheets="@../css/menu.css" vbarPolicy="ALWAYS">
                <VBox.margin>
-                  <Insets left="200.0" right="200.0" />
+                  <Insets left="220.0" right="220.0" />
                </VBox.margin>
                <content>
-                  <FlowPane columnHalignment="CENTER" hgap="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="866.0" vgap="20.0">
-                     <children>
-                        <Button fx:id="persButton" layoutX="30.0" layoutY="38.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#persDoubleMouseClicked" styleClass="pers" />
-                        <Button fx:id="ratButton" layoutX="120.0" layoutY="38.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#ratDoubleMouseClicked" styleClass="rat" />
-                        <Button fx:id="spiderButton" layoutX="211.0" layoutY="38.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#spiderDoubleMouseClicked" styleClass="spider" />
-                        <Button fx:id="animButton" layoutX="120.0" layoutY="30.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#animDoubleMouseClicked" styleClass="anim" />
-                        <Button fx:id="croshButton" layoutX="390.0" layoutY="22.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#croshDoubleMouseClicked" styleClass="crosh" />
-                     </children>
+                  <FlowPane fx:id="pane" columnHalignment="CENTER" hgap="20.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="866.0" vgap="20.0">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </FlowPane>
                </content>
             </ScrollPane>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="119.0" text="Добавить">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefHeight="140.0" prefWidth="880.0" styleClass="flow-pane" vgap="20.0">
-               <VBox.margin>
-                  <Insets left="200.0" right="200.0" />
-               </VBox.margin>
-               <children>
-                  <Button fx:id="persButton1" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#persDoubleMouseClicked" styleClass="pers" visible="false" />
-                  <Button fx:id="persButton11" layoutX="11.0" layoutY="11.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#persDoubleMouseClicked" styleClass="pers" visible="false" />
-                  <Button fx:id="persButton12" layoutX="11.0" layoutY="11.0" minHeight="100.0" minWidth="100.0" mnemonicParsing="false" onMouseClicked="#persDoubleMouseClicked" styleClass="pers" visible="false" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </FlowPane>
-            <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="119.0" text="Удалить">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Button>
-            <Button fx:id="mainButton" mnemonicParsing="false" onAction="#mainButtonPressed" text="Готово">
+            <Button fx:id="chooseButton" mnemonicParsing="false" onAction="#chooseButtonAction" text="Выбрать">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Label text="Невозможно подключиться" textFill="RED" visible="false" />
+            <Label fx:id="errorText" text="Выберите ровно 3 персонажей" textFill="RED" visible="false">
+               <font>
+                  <Font size="25.0"/>
+               </font>
+            </Label>
          </children>
          <stylesheets>
             <URL value="@../css/hero.css" />

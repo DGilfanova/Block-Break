@@ -11,4 +11,6 @@ public class Constants {
     public static final int START_GAME = 3;
     public static final int GAME_STATE = 4;
     public static final int FINISH = 5;
+
+    public static final int MAXIMUM_CHARACTERS_NUM = 3;
 }

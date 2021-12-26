@@ -2,3 +2,8 @@
     -fx-background-image: url('/images/img.png');
     -fx-background-size: 100% 100%;
 }
+
+.bodybg2 {
+    -fx-background-image: url('/images/loadImageWithout.png');
+    -fx-background-size: 100% 100%;
+}

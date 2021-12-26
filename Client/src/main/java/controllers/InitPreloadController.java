@@ -1,6 +1,6 @@
 package controllers;
 
-import utils.Resource;
+import helpers.utils.Resource;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;

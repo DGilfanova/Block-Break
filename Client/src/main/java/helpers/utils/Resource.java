@@ -1,7 +1,6 @@
-package utils;
+package helpers.utils;
 
 import controllers.GUI;
-import controllers.MenuController;
 import helpers.constants.Constants;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

@@ -8,7 +8,7 @@ import controllers.GUIPreloadController;
 import fertdt.MessageReadingException;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
-import helpers.adapters.StorageAdapter;
+import helpers.constants.Storage;
 import helpers.constants.Constants;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +31,7 @@ public class SocketClient implements Client{
 
     public void start() throws ClientException {
         connect();
-        StorageAdapter.client = this;
+        Storage.client = this;
         read(socket);
         this.GUIStart();
     }
@@ -66,7 +66,6 @@ public class SocketClient implements Client{
                         list.add((byte) n);
                         try {
                             ResponseMessage responseMessage = ResponseMessage.readMessage(list);
-                            System.out.println(responseMessage);
 
                             int messageType = responseMessage.getMessageType();
                             switch (messageType) {

@@ -1,9 +1,9 @@
-package helpers.adapters;
+package helpers.constants;
 
 import client.Client;
 import lombok.Setter;
 
 @Setter
-public class StorageAdapter {
+public class Storage {
     public static Client client;
 }

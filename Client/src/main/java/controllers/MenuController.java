@@ -4,9 +4,9 @@ import client.Client;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
 import helpers.constants.Constants;
-import helpers.adapters.StorageAdapter;
+import helpers.constants.Storage;
 import javafx.application.Platform;
-import utils.Resource;
+import helpers.utils.Resource;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import models.Game;
 
 public class MenuController {
 
@@ -37,9 +38,11 @@ public class MenuController {
     private VBox vBox;
 
     private Client client;
+    private Game game;
 
     public void initialize() {
-        client = StorageAdapter.client;
+        client = Storage.client;
+        game = new Game();
     }
 
     @FXML

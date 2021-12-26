@@ -1,89 +1,114 @@
 package controllers;
 
 import client.Client;
+import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
-import helpers.adapters.StorageAdapter;
-import utils.Resource;
-import javafx.event.ActionEvent;
+import helpers.constants.Storage;
+import helpers.constants.Constants;
+import helpers.utils.Resource;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
+import javafx.scene.control.*;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
+import javafx.scene.layout.FlowPane;
+import models.Game;
+import models.characters.AbstractCharacter;
+
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class CharacterSelectionController {
 
     @FXML
-    public Button mainButton;
+    public FlowPane pane;
 
     @FXML
-    public Button croshButton;
+    public Label errorText;
 
-    @FXML
-    public Button persButton;
+    private HashSet<Integer> characters = new HashSet<>();
 
-    @FXML
-    public Button ratButton;
-
-    @FXML
-    public Button spiderButton;
-
-    @FXML
-    public Button animButton;
-
-    //добавляешь в arraylist и передаешь в след сцену, где уже выбираешь скиллы
-    //в методах проверяешь длину листа
-    //private ArrayList<> heroes;
     private Client client;
 
+    private Game game;
+
     public void initialize() {
-        client = StorageAdapter.client;
-    }
+        client = Storage.client;
 
-    @FXML
-    private void croshDoubleMouseClicked(MouseEvent mouseEvent) {
-        getButton(croshButton);
-    }
+        game = new Game();
 
-    @FXML
-    public void persDoubleMouseClicked(MouseEvent mouseEvent) {
-        getButton(persButton);
-    }
-    @FXML
-    private void animDoubleMouseClicked(MouseEvent mouseEvent) {
-        getButton(animButton);
-    }
-    @FXML
-    private void ratDoubleMouseClicked(MouseEvent mouseEvent) {
-        getButton(ratButton);
-    }
+        for (AbstractCharacter c: game.getCharacters()) {
+            ToggleGroup gr = new ToggleGroup();
+            ToggleButton button = new ToggleButton();
 
-    @FXML
-    private void spiderDoubleMouseClicked(MouseEvent mouseEvent) {
-        getButton(spiderButton);
-    }
+            //передать ссылку на фотографию(в таком же виде, как и пример)
+            button.setStyle("-fx-min-width: 100px;-fx-min-height: 100px;-fx-background-image: url('" + "/images/phantom.png" + "');-fx-background-size: 100% 100%;");
+            button.setToggleGroup(gr);
+            button.setSelected(false);
+            button.setId(c.getId().toString());
 
-    @FXML
-    private void mainButtonPressed(ActionEvent event) {
-        GUI.getStage().setScene(Resource.getScenes().get("mainView"));
-        GUI.getStage().show();
-    }
-
-    private void getButton(Button button) {
-        button.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                DialogController dialogController = new DialogController();
-                try {
-                    dialogController.start(new Stage());
-                } catch (Exception e) {
-                    e.printStackTrace();
+            button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    if (button.isSelected()) {
+                        characters.add(Integer.valueOf(button.getId()));
+                    } else {
+                        characters.remove(Integer.valueOf(button.getId()));
+                    }
                 }
+            });
+
+            button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    //Кристина, для тебя
+                }
+            });
+
+            button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    //тоже для тебя
+                }
+            });
+
+            pane.getChildren().add(button);
+        }
+    }
+
+    @FXML
+    private void chooseButtonAction(ActionEvent event) {
+        if (characters.size() == Constants.MAXIMUM_CHARACTERS_NUM) {
+            errorText.setVisible(false);
+
+            //отвратительно
+            Iterator<Integer> it = characters.iterator();
+            int[] chars = new int[Constants.MAXIMUM_CHARACTERS_NUM];
+            int c = 0;
+            while(it.hasNext()){
+                chars[c] = it.next();
+                c++;
             }
-        });
+
+            //null или что передавать?
+            RequestMessage requestMessage = RequestMessage.createCharacterAndSkillSelectMessage(chars, new int[]{1,2,3});
+            client.sendMessage(requestMessage);
+        } else {
+            errorText.setVisible(true);
+        }
     }
 
     public static void handleMessage(ResponseMessage responseMessage) {
+        Platform.runLater(new Runnable(){
+            @Override
+            public void run() {
+                System.out.println(responseMessage);
 
+                GUI.getStage().setScene(Resource.getScenes().get(Constants.MAIN_RESOURCE_NAME));
+                GUI.getStage().setResizable(true);
+                GUI.getStage().show();
+            }
+        });
     }
 }
