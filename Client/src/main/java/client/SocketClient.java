@@ -78,8 +78,8 @@ public class SocketClient implements Client{
                                     break;
                                 }
                                 case (Constants.GAME_STATE):{
-                                    MenuController.handleMessage(responseMessage);
-                                    break;
+                                    //MainController.handleMessage(responseMessage);
+                                    //break;
                                 }
                             }
 

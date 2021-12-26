@@ -91,7 +91,6 @@ public class CharacterSelectionController {
                 c++;
             }
 
-            //null или что передавать?
             RequestMessage requestMessage = RequestMessage.createCharacterAndSkillSelectMessage(chars, new int[]{1,2,3});
             client.sendMessage(requestMessage);
         } else {
@@ -106,7 +105,6 @@ public class CharacterSelectionController {
                 System.out.println(responseMessage);
 
                 GUI.getStage().setScene(Resource.getScenes().get(Constants.MAIN_RESOURCE_NAME));
-                GUI.getStage().setResizable(true);
                 GUI.getStage().show();
             }
         });

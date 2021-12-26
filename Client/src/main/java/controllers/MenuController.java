@@ -32,10 +32,6 @@ public class MenuController {
     private static Label errorLabel;
     @FXML
     private TextField addressTextField;
-    @FXML
-    private Button connectButton;
-    @FXML
-    private VBox vBox;
 
     private Client client;
     private Game game;
@@ -101,7 +97,6 @@ public class MenuController {
                     System.out.println(responseMessage);
 
                     GUI.getStage().setScene(Resource.getScenes().get(Constants.CHARACTER_SELECTION_RESOURCE_NAME));
-                    GUI.getStage().setResizable(true);
                     GUI.getStage().show();
                 } else {
                     fail("Проблемы с сервером! Попробуйте снова");

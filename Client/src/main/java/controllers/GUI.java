@@ -15,7 +15,7 @@ public class GUI extends Application {
     @Override
     public void init() throws Exception {
         InitPreloadController initPreloadController = new InitPreloadController();
-        initPreloadController.checkFunctions();
+        initPreloadController.loadResources();
     }
 
     @Override

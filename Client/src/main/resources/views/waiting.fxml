@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="bodybg2" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="graphics.controllers.CharacterSelectionController">
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" styleClass="bodybg2" stylesheets="@../css/menu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.WaitingController">
    <children>
-      <Label alignment="CENTER" layoutX="390.0" layoutY="295.0" prefHeight="130.0" prefWidth="250.0" text="Ожидаем.." textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
+      <Label fx:id="waitLabel" text="Ожидаем второго игрока..." alignment="CENTER" layoutX="390.0" layoutY="295.0" prefHeight="130.0" prefWidth="250.0" textFill="WHITE" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="73.0" />
          </font>

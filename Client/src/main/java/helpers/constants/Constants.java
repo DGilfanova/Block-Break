@@ -5,6 +5,7 @@ public class Constants {
     public final static String CHARACTER_SELECTION_RESOURCE_NAME = "charSelectView";
     public final static String MENU_CONNECTION_BY_ROOM_RESOURCE_NAME = "connByIdView";
     public final static String MAIN_RESOURCE_NAME = "mainView";
+    public final static String WAITING_RESOURCE_NAME = "waitingView";
 
     public static final int REQUEST_STATUS = 1;
     public static final int CHARACTER_SELECTION = 2;
