@@ -5,10 +5,10 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell extends Rectangle {
 
-    private static final int width = 30;
-    private static final int height = 30;
+    private static final int width = 50;
+    private static final int height = 50;
 
-    private static final Color defaultColor = Color.WHITE;
+    private static final Color blockedColor = Color.BLACK;
     private static final Color hoverColor = Color.GRAY;
 
     private int x,y;

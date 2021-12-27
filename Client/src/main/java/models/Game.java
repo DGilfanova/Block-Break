@@ -12,6 +12,8 @@ public class Game {
 
     private ArrayList<AbstractCharacter> characters = new ArrayList<>();
 
+    private int[][] startBlock;
+
     public Game() {
         characters.add(new ItadoriSukunaCharacter());
         characters.add(new MegumiCharacter());

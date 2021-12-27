@@ -20,15 +20,8 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        stage = primaryStage;
-//        Parent root = FXMLLoader.load(getClass().getResource("/views/menu.fxml"));
-//        primaryStage.setTitle("Block Break");
-//        primaryStage.getIcons().add(new Image(getClass().getResource("/images/appIcon.png").toString()));
-//        primaryStage.setResizable(true);
-//        primaryStage.setScene(new Scene(root));
-//        primaryStage.show();
         stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/views/game.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/views/menu.fxml"));
         primaryStage.setTitle("Block Break");
         primaryStage.getIcons().add(new Image(getClass().getResource("/images/appIcon.png").toString()));
         primaryStage.setResizable(true);

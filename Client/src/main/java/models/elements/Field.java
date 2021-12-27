@@ -13,26 +13,16 @@ import java.util.ArrayList;
 @Setter
 public class Field extends Parent {
 
-    //заполнить цветами
     ArrayList<Color> colorList;
 
-    private final static int xSize = 4;
-    private final static int ySize = 4;
+    private final static int xSize = 8;
+    private final static int ySize = 8;
 
     private VBox rows = new VBox();
-    private boolean enemy = false;
 
     public Field(int[][]array) {
         initColorList();
         createBoard(array);
-    }
-
-    public void initColorList() {
-        colorList = new ArrayList<>();
-        colorList.add(Color.YELLOW);
-        colorList.add(Color.CORAL);
-        colorList.add(Color.BLUEVIOLET);
-        colorList.add(Color.MAGENTA);
     }
 
     public void createBoard(int[][]array) {
@@ -53,6 +43,33 @@ public class Field extends Parent {
             rows.getChildren().add(row);
         }
         getChildren().add(rows);
+    }
+
+    public void initColorList() {
+        colorList = new ArrayList<>();
+        colorList.add(Color.YELLOW);
+        colorList.add(Color.CORAL);
+        colorList.add(Color.BLUEVIOLET);
+        colorList.add(Color.MAGENTA);
+        colorList.add(Color.MAROON);
+        colorList.add(Color.MEDIUMVIOLETRED);
+        colorList.add(Color.LIME);
+        colorList.add(Color.LIGHTGRAY);
+        colorList.add(Color.LIGHTSALMON);
+        colorList.add(Color.INDIGO);
+        colorList.add(Color.LAVENDER);
+        colorList.add(Color.KHAKI);
+        colorList.add(Color.IVORY);
+        colorList.add(Color.LEMONCHIFFON);
+        colorList.add(Color.LIGHTCYAN);
+        colorList.add(Color.MEDIUMSEAGREEN);
+        colorList.add(Color.MINTCREAM);
+        colorList.add(Color.MIDNIGHTBLUE);
+        colorList.add(Color.OLIVE);
+        colorList.add(Color.MOCCASIN);
+        colorList.add(Color.PALEGOLDENROD);
+        colorList.add(Color.NAVY);
+        colorList.add(Color.PEACHPUFF);
     }
 
     public Cell getCell(int x, int y) {

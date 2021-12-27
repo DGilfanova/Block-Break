@@ -35,8 +35,7 @@ public class CharacterSelectionController {
     private HashSet<Integer> characters = new HashSet<>();
 
     private Client client;
-
-    private Game game;
+    public static Game game;
 
     public void initialize() {
         client = Storage.client;

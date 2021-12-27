@@ -76,7 +76,12 @@ public class SocketClient implements Client{
                                     break;
                                 }
                                 case (Constants.GAME_STATE):{
-                                        //GameController.handleMessageForGameState(responseMessage);
+                                    if (i == 0) {
+                                        i++;
+                                        GameController.handleMessageForGameStart(responseMessage);
+                                    } else {
+                                        GameController.handleMessageForGameState(responseMessage);
+                                    }
                                     break;
                                 }
                                 case (Constants.FINISH):{
