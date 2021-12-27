@@ -66,7 +66,6 @@ public class MenuController {
         enterButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                errorLabel.setVisible(false);
                 String roomIdText = addressTextField.getText();
                 Integer roomId;
                 try {

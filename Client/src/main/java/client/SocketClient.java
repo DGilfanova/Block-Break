@@ -1,10 +1,7 @@
 package client;
 
-import controllers.CharacterSelectionController;
-import controllers.GUI;
-import controllers.MenuController;
+import controllers.*;
 import exceptions.ClientException;
-import controllers.GUIPreloadController;
 import fertdt.MessageReadingException;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
@@ -66,6 +63,7 @@ public class SocketClient implements Client{
                         list.add((byte) n);
                         try {
                             ResponseMessage responseMessage = ResponseMessage.readMessage(list);
+                            int i = 0;
 
                             int messageType = responseMessage.getMessageType();
                             switch (messageType) {
@@ -78,7 +76,11 @@ public class SocketClient implements Client{
                                     break;
                                 }
                                 case (Constants.GAME_STATE):{
-                                    //MainController.handleMessage(responseMessage);
+                                        //GameController.handleMessageForGameState(responseMessage);
+                                    break;
+                                }
+                                case (Constants.FINISH):{
+                                    //FinishController.handleMessage(responseMessage);
                                     //break;
                                 }
                             }

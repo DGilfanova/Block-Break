@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" stylesheets="@../css/menu.css" styleClass="bodybg2" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" fx:controller="controllers.GameController" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="720.0" prefWidth="1280.0">
+         <top>
+            <Pane prefHeight="94.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+         </top>
+         <left>
+            <VBox prefHeight="642.0" prefWidth="120.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="642.0" prefWidth="124.0" BorderPane.alignment="CENTER" />
+         </right>
+         <bottom>
+            <HBox prefHeight="131.0" prefWidth="1280.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <HBox prefHeight="495.0" prefWidth="1034.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Pane fx:id="gameField1" prefHeight="495.0" prefWidth="595.0" />
+                  <Pane prefHeight="495.0" prefWidth="44.0" />
+                  <Pane fx:id="gameField2" prefHeight="495.0" prefWidth="496.0" />
+               </children>
+            </HBox>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

@@ -11,6 +11,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import models.Game;
@@ -25,7 +27,10 @@ public class CharacterSelectionController {
     public FlowPane pane;
 
     @FXML
-    public Label errorText;
+    public Label errorText,nameLabel,normalSkillLabel,specialSkillLabel;
+
+    @FXML
+    public ImageView damageImage, specialSkillImage, normalSkillImage;
 
     private HashSet<Integer> characters = new HashSet<>();
 
@@ -42,8 +47,7 @@ public class CharacterSelectionController {
             ToggleGroup gr = new ToggleGroup();
             ToggleButton button = new ToggleButton();
 
-            //передать ссылку на фотографию(в таком же виде, как и пример)
-            button.setStyle("-fx-min-width: 100px;-fx-min-height: 100px;-fx-background-image: url('" + "/images/phantom.png" + "');-fx-background-size: 100% 100%;");
+            button.setStyle("-fx-min-width: 100px;-fx-min-height: 100px;-fx-background-image: url('" + c.getImagePath() + "');-fx-background-size: 100% 100%;");
             button.setToggleGroup(gr);
             button.setSelected(false);
             button.setId(c.getId().toString());
@@ -62,14 +66,24 @@ public class CharacterSelectionController {
             button.setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //Кристина, для тебя
+                    nameLabel.setText(c.getName());
+                    normalSkillLabel.setText(c.getNormalSkill());
+                    specialSkillLabel.setText(c.getSpecialSkill());
+                    specialSkillImage.setImage(new Image(c.getSpecialSkillImage()));
+                    damageImage.setImage(new Image(c.getDamageImage()));
+                    normalSkillImage.setImage(new Image(c.getNormalSkillImage()));
                 }
             });
 
-            button.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            button.setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    //тоже для тебя
+                    nameLabel.setText("");
+                    normalSkillLabel.setText("");
+                    specialSkillLabel.setText("");
+                    specialSkillImage.setImage(null);
+                    damageImage.setImage(null);
+                    normalSkillImage.setImage(null);
                 }
             });
 
@@ -82,7 +96,6 @@ public class CharacterSelectionController {
         if (characters.size() == Constants.MAXIMUM_CHARACTERS_NUM) {
             errorText.setVisible(false);
 
-            //отвратительно
             Iterator<Integer> it = characters.iterator();
             int[] chars = new int[Constants.MAXIMUM_CHARACTERS_NUM];
             int c = 0;
@@ -104,7 +117,7 @@ public class CharacterSelectionController {
             public void run() {
                 System.out.println(responseMessage);
 
-                GUI.getStage().setScene(Resource.getScenes().get(Constants.MAIN_RESOURCE_NAME));
+                GUI.getStage().setScene(Resource.getScenes().get(Constants.GAME_RESOURCE_NAME));
                 GUI.getStage().show();
             }
         });
