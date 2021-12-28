@@ -15,9 +15,6 @@ public class Field extends Parent {
 
     ArrayList<Color> colorList;
 
-    private final static int xSize = 8;
-    private final static int ySize = 8;
-
     private VBox rows = new VBox();
 
     public Field(int[][]array) {

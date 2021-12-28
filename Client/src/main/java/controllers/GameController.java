@@ -1,9 +1,9 @@
 package controllers;
 
-import client.Client;
+import client.ResponseMessageHandler;
+import client.SocketClient;
 import fertdt.ResponseMessage;
 import helpers.constants.Constants;
-import helpers.constants.Storage;
 import helpers.handlers.GameStateHandler;
 import helpers.utils.Resource;
 import javafx.application.Platform;
@@ -15,28 +15,33 @@ import models.elements.Field;
 public class GameController {
 
     @FXML
-    private static Pane gameField1;
+    public Pane gameField1;
 
     @FXML
-    private static Pane gameField2;
+    public Pane gameField2;
 
-    private static Field fieldMy;
-    private static Field fieldOpposite;
-
-    private Client client;
+    private static GameController instance;
+    private static SocketClient client;
+    private static ResponseMessageHandler responseMessageHandler;
     private static Game game;
 
-    public static void handleMessageForGameStart(ResponseMessage responseMessage) {
+    public static GameController getInstance() {
+        return instance;
+    }
+
+    public void handleMessageForGameStart(ResponseMessage responseMessage) {
+        int [][] a = GameStateHandler.processStartBlock(responseMessage.getX(), responseMessage.getY());
+        game.setStartBlock(a);
+
+        Field fieldMy = new Field(game.getStartBlock());
+        Field fieldOpposite = new Field(game.getStartBlock());
+
+        gameField1.getChildren().add(fieldMy);
+        gameField2.getChildren().add(fieldOpposite);
+
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
-                game.setStartBlock(GameStateHandler.processStartBlock(responseMessage.getX(), responseMessage.getY()));
-                fieldMy = new Field(game.getStartBlock());
-                fieldOpposite = new Field(game.getStartBlock());
-
-                gameField1.getChildren().add(fieldMy);
-                gameField2.getChildren().add(fieldOpposite);
-
                 GUI.getStage().setScene(Resource.getScenes().get(Constants.GAME_RESOURCE_NAME));
                 GUI.getStage().show();
             }
@@ -46,9 +51,16 @@ public class GameController {
     public static void handleMessageForGameState(ResponseMessage responseMessage) {
     }
 
+    public static void handleMessageForTurn(ResponseMessage responseMessage) {
+    }
 
     public void initialize() {
-        client = Storage.client;
+        instance = this;
+
+        client = SocketClient.getInstance();
+        responseMessageHandler = ResponseMessageHandler.getInstance();
+        responseMessageHandler.setGameController(instance);
         game = CharacterSelectionController.game;
+
     }
 }

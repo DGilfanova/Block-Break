@@ -1,10 +1,10 @@
 package controllers;
 
 import client.Client;
+import client.SocketClient;
 import fertdt.RequestMessage;
 import fertdt.ResponseMessage;
 import helpers.constants.Constants;
-import helpers.constants.Storage;
 import javafx.application.Platform;
 import helpers.utils.Resource;
 import javafx.event.ActionEvent;
@@ -15,7 +15,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import models.Game;
 
 public class MenuController {
@@ -33,11 +32,11 @@ public class MenuController {
     @FXML
     private TextField addressTextField;
 
-    private Client client;
+    private static SocketClient client;
     private Game game;
 
     public void initialize() {
-        client = Storage.client;
+        client = SocketClient.getInstance();
         game = new Game();
     }
 
@@ -50,6 +49,9 @@ public class MenuController {
             public void handle(MouseEvent event) {
                 RequestMessage requestMessage = RequestMessage.createStartRequestMessage(DEFAULT_ROOM_ID);
                 client.sendMessage(requestMessage);
+
+                GUI.getStage().setScene(Resource.getScenes().get(Constants.WAITING_RESOURCE_NAME));
+                GUI.getStage().show();
             }
         });
     }
@@ -77,6 +79,9 @@ public class MenuController {
 
                 RequestMessage requestMessage = RequestMessage.createStartRequestMessage(roomId);
                 client.sendMessage(requestMessage);
+
+                GUI.getStage().setScene(Resource.getScenes().get(Constants.WAITING_RESOURCE_NAME));
+                GUI.getStage().show();
             }
         });
     }
@@ -86,22 +91,6 @@ public class MenuController {
         GUI.getStage().setScene(Resource.getScenes().get(Constants.MENU_RESOURCE_NAME));
         GUI.getStage().setResizable(true);
         GUI.getStage().show();
-    }
-
-    public static void handleMessage(ResponseMessage responseMessage) {
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                if (responseMessage.getMessageType() == 2) {
-                    System.out.println(responseMessage);
-
-                    GUI.getStage().setScene(Resource.getScenes().get(Constants.CHARACTER_SELECTION_RESOURCE_NAME));
-                    GUI.getStage().show();
-                } else {
-                    fail("Проблемы с сервером! Попробуйте снова");
-                }
-            }
-        });
     }
 
     private static void fail(String errorText) {

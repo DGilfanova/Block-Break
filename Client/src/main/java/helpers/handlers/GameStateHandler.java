@@ -1,12 +1,13 @@
 package helpers.handlers;
 
 import exceptions.WrongResponseMessageException;
+import helpers.constants.Constants;
 
 public class GameStateHandler {
 
     public static int[][] processStartBlock(int [][] x, int[][] y) {
         if (x.length == y.length) {
-            int[][] newArray = new int[x.length][y.length];
+            int[][] newArray = new int[Constants.FIELD_WIDTH][Constants.FIELD_HEIGHT];
             for (int i = 0; i < x.length; i++) {
                 newArray[x[i][0]][y[i][0]] = x[i][1];
             }

@@ -1,12 +1,9 @@
 package controllers;
 
-import client.Client;
+import client.SocketClient;
 import fertdt.RequestMessage;
-import fertdt.ResponseMessage;
-import helpers.constants.Storage;
 import helpers.constants.Constants;
 import helpers.utils.Resource;
-import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.event.ActionEvent;
@@ -34,12 +31,11 @@ public class CharacterSelectionController {
 
     private HashSet<Integer> characters = new HashSet<>();
 
-    private Client client;
+    private static SocketClient client;
     public static Game game;
 
     public void initialize() {
-        client = Storage.client;
-
+        client = SocketClient.getInstance();
         game = new Game();
 
         for (AbstractCharacter c: game.getCharacters()) {
@@ -105,20 +101,11 @@ public class CharacterSelectionController {
 
             RequestMessage requestMessage = RequestMessage.createCharacterAndSkillSelectMessage(chars, new int[]{1,2,3});
             client.sendMessage(requestMessage);
+
+            GUI.getStage().setScene(Resource.getScenes().get(Constants.WAITING_RESOURCE_NAME));
+            GUI.getStage().show();
         } else {
             errorText.setVisible(true);
         }
-    }
-
-    public static void handleMessage(ResponseMessage responseMessage) {
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                System.out.println(responseMessage);
-
-                GUI.getStage().setScene(Resource.getScenes().get(Constants.GAME_RESOURCE_NAME));
-                GUI.getStage().show();
-            }
-        });
     }
 }
