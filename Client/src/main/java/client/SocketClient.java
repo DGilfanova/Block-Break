@@ -2,23 +2,19 @@ package client;
 
 import controllers.*;
 import exceptions.ClientException;
-import fertdt.MessageReadingException;
 import fertdt.RequestMessage;
-import fertdt.ResponseMessage;
 import helpers.constants.Constants;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter
 public class SocketClient implements Client{
+
     private static final int PORT = 10034;
 
     private Socket socket;
@@ -26,8 +22,10 @@ public class SocketClient implements Client{
 
     public void start() throws ClientException {
         this.instance = this;
+
         connect();
         readMessages(socket);
+
         this.GUIStart();
     }
 
@@ -37,28 +35,26 @@ public class SocketClient implements Client{
             socket.getOutputStream().flush();
         }
         catch(IOException ex) {
-            throw new ClientException("Can't send message.", ex);
+            throw new ClientException(ex);
         }
     }
 
     public void GUIStart() {
-        System.setProperty("javafx.preloader", GUIPreloadController.class.getCanonicalName());
+        System.setProperty(Constants.PRELOADER_NAME, GUIPreloadController.class.getCanonicalName());
         GUI.launch(GUI.class);
     }
 
     public void connect() throws ClientException {
         try {
             socket = new Socket(InetAddress.getLocalHost(), PORT);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
     }
 
     public void closeSocket(){
         try {
             socket.close();
-        } catch (IOException e) {
-            //ignore
+        } catch (IOException ignored) {
         }
     }
 

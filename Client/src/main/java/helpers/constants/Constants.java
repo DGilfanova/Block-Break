@@ -8,13 +8,25 @@ public class Constants {
     public final static String WAITING_RESOURCE_NAME = "waitingView";
     public final static String FINAL_RESOURCE_NAME = "finalView";
 
-    public static final int CHARACTER_SELECTION = 2;
-    public static final int START_GAME = 3;
-    public static final int GAME_STATE = 4;
-    public static final int FINISH = 5;
+    public final static String MENU_VIEW_PATH = "/views/menu.fxml";
+    public final static String SELECT_CHARACTER_VIEW_PATH = "/views/characterSelection.fxml";
+    public final static String CONN_BY_ID_VIEW_PATH = "/views/conn-by-id.fxml";
+    public final static String GAME_VIEW_PATH = "/views/game.fxml";
+    public final static String WAITING_VIEW_PATH = "/views/waiting.fxml";
+    public final static String FINAL_VIEW_PATH = "/views/final.fxml";
 
-    public static final int FIELD_WIDTH = 8;
-    public static final int FIELD_HEIGHT = 8;
+    public final static String  PRELOADER_NAME = "javafx.preloader";
 
-    public static final int MAXIMUM_CHARACTERS_NUM = 3;
+    public final static int CHARACTER_SELECTION = 2;
+    public final static int START_GAME = 3;
+    public final static int GAME_STATE = 4;
+    public final static int FINISH = 5;
+
+    public final static int FIELD_WIDTH = 8;
+    public final static int FIELD_HEIGHT = 8;
+
+    public final static int MAXIMUM_CHARACTERS_NUM = 3;
+
+    public final static int PLAYER_TURN_ON = 1;
+    public final static int PLAYER_TURN_OFF = 2;
 }

@@ -24,10 +24,7 @@ public class GameController {
     private static SocketClient client;
     private static ResponseMessageHandler responseMessageHandler;
     private static Game game;
-
-    public static GameController getInstance() {
-        return instance;
-    }
+    private boolean turn = false;
 
     public void handleMessageForGameStart(ResponseMessage responseMessage) {
         int [][] a = GameStateHandler.processStartBlock(responseMessage.getX(), responseMessage.getY());
@@ -48,10 +45,20 @@ public class GameController {
         });
     }
 
-    public static void handleMessageForGameState(ResponseMessage responseMessage) {
+    public void handleMessageForGameState(ResponseMessage responseMessage) {
+        //учитывать turn
+
+        //баллы
+
+        //перерисовка полей
     }
 
-    public static void handleMessageForTurn(ResponseMessage responseMessage) {
+    public void handleMessageForTurn(ResponseMessage responseMessage) {
+        if (responseMessage.getPlayer() == Constants.PLAYER_TURN_ON) {
+            turn = true;
+        } else {
+            turn = false;
+        }
     }
 
     public void initialize() {
@@ -61,6 +68,9 @@ public class GameController {
         responseMessageHandler = ResponseMessageHandler.getInstance();
         responseMessageHandler.setGameController(instance);
         game = CharacterSelectionController.game;
+    }
 
+    public static GameController getInstance() {
+        return instance;
     }
 }

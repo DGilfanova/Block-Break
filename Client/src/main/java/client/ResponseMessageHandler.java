@@ -2,7 +2,6 @@ package client;
 
 import controllers.FinalController;
 import controllers.GameController;
-import controllers.MenuController;
 import controllers.WaitingController;
 import fertdt.MessageReadingException;
 import fertdt.ResponseMessage;
@@ -20,8 +19,10 @@ import java.util.List;
 public class ResponseMessageHandler implements Runnable {
 
     private InputStream is;
+
     private GameController gameController;
     private WaitingController waitingController;
+
     private static ResponseMessageHandler instance;
 
     public ResponseMessageHandler(InputStream is) {
@@ -40,7 +41,7 @@ public class ResponseMessageHandler implements Runnable {
                     try {
                         ResponseMessage responseMessage = ResponseMessage.readMessage(list);
                         System.out.println(responseMessage);
-                        boolean init = false;
+                        boolean init = true;
 
                         int messageType = responseMessage.getMessageType();
                         switch (messageType) {
@@ -49,15 +50,15 @@ public class ResponseMessageHandler implements Runnable {
                                 break;
                             }
                             case (Constants.START_GAME):{
-                                GameController.handleMessageForTurn(responseMessage);
+                                gameController.handleMessageForTurn(responseMessage);
                                 break;
                             }
                             case (Constants.GAME_STATE):{
-                                if (!init) {
+                                if (init) {
+                                    init = false;
                                     gameController.handleMessageForGameStart(responseMessage);
-                                    init = true;
                                 } else {
-                                    GameController.handleMessageForGameState(responseMessage);
+                                    gameController.handleMessageForGameState(responseMessage);
                                 }
                                 break;
                             }
