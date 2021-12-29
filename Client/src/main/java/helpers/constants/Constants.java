@@ -1,5 +1,7 @@
 package helpers.constants;
 
+import javafx.scene.paint.Color;
+
 public class Constants {
     public final static String MENU_RESOURCE_NAME = "menuView";
     public final static String CHARACTER_SELECTION_RESOURCE_NAME = "charSelectView";
@@ -29,6 +31,9 @@ public class Constants {
 
     public final static int PLAYER_TURN_ON = 1;
     public final static int PLAYER_TURN_OFF = 2;
+    public final static int PLAYER_DRAW = 3;
 
     public final static int MAXIMUM_CELLS_HOVER = 5;
+
+    public final static Color BROKEN_COLOR = Color.GRAY;
 }

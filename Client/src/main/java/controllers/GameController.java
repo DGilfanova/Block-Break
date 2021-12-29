@@ -33,17 +33,20 @@ public class GameController {
     public Pane gameField2;
 
     @FXML
-    public Label errorLabel,pointLabel,movingLabel;
+    public Label errorLabel,pointsMy,movingLabel, pointsOpponent;
 
     @FXML
-    public Button normalMove,normalSkill,specialSkill,myChar1,myChar2,myChar3;
+    public Button myChar1,myChar2,myChar3;
+
+    public List<Button> buttonList = new ArrayList<>();
 
     private static GameController instance;
     private static SocketClient client;
     private static ResponseMessageHandler responseMessageHandler;
     private static Game game;
     private ArrayList<AbstractCharacter> usedCharacters = new ArrayList<>();
-    private boolean turn,clicked;
+    private List<AbstractCharacter> myCharacters = new ArrayList<>();
+    private boolean turn;
 
     public static GameController getInstance() {
         return instance;
@@ -57,8 +60,8 @@ public class GameController {
                 int [][] a = GameStateHandler.processStartBlock(responseMessage.getX(), responseMessage.getY());
                 game.setStartBlock(a);
 
-                Field fieldMy = new Field(game.getStartBlock());
-                Field fieldOpposite = new Field(game.getStartBlock());
+                Field fieldMy = new Field(game.getStartBlock(), game);
+                Field fieldOpposite = new Field(game.getStartBlock(), game);
 
                 gameField1.getChildren().add(fieldMy);
                 gameField2.getChildren().add(fieldOpposite);
@@ -70,9 +73,8 @@ public class GameController {
                     chars[c] = it.next();
                     c++;
                 }
-                List<AbstractCharacter> myCharacters = GameStateHandler.processStartCharacters(chars,game);
+                myCharacters = GameStateHandler.processStartCharacters(chars,game);
 
-                List<Button> buttonList = new ArrayList<>();
                 buttonList.add(myChar1);
                 buttonList.add(myChar2);
                 buttonList.add(myChar3);
@@ -100,16 +102,52 @@ public class GameController {
             public void run() {
                 fail(null);
 
-                pointLabel.setText(String.valueOf(responseMessage.getPointsMy()[0]));
+                //проверка баллов
+                int [] pMy = responseMessage.getPointsMy();
+                int [] pOpponent = responseMessage.getPointsOpponent();
+                game.setPointsMy(pMy[0]);
+                game.setPointsOpponent(pOpponent[0]);
 
-                int [][] a = GameStateHandler.processStartBlock(responseMessage.getX(), responseMessage.getY());
-                game.setStartBlock(a);
+                pointsMy.setText(String.valueOf(game.getPointsMy()));
+                pointsOpponent.setText(String.valueOf(game.getPointsOpponent()));
 
-                Field fieldMy = new Field(game.getStartBlock());
-                Field fieldOpposite = new Field(game.getStartBlock());
+                //перерисовка
+                int [][] newMyBlock = GameStateHandler.processBlockState(responseMessage.getBlockStateMy(), game.getStartBlock());
+                for (int i = 0; i < game.getStartBlock().length; i++) {
+                    for (int j = 0; j < game.getStartBlock().length; j++) {
+                        System.out.print(game.getStartBlock()[i][j] + " ");
+                    }
+                    System.out.println();
+                }
+                System.out.println();
+                for (int i = 0; i < responseMessage.getBlockStateMy().length; i++) {
+                        System.out.println(responseMessage.getBlockStateMy()[i][0] + " " + responseMessage.getBlockStateMy()[i][1]);
+                }
+                System.out.println();
+
+                for (int i = 0; i < newMyBlock.length; i++) {
+                    for (int j = 0; j < newMyBlock.length; j++) {
+                        System.out.print(newMyBlock[i][j] + " ");
+                    }
+                    System.out.println();
+                }
+                int [][] newOppositeBlock = GameStateHandler.processBlockState(responseMessage.getBlockStateOpponent(), game.getStartBlock());
+
+                Field fieldMy = new Field(newMyBlock, Constants.BROKEN_COLOR, game);
+                Field fieldOpposite = new Field(newOppositeBlock, Constants.BROKEN_COLOR, game);
 
                 gameField1.getChildren().add(fieldMy);
                 gameField2.getChildren().add(fieldOpposite);
+
+                for(int i = 0; i<Constants.MAXIMUM_CHARACTERS_NUM;i++){
+                    int finalI = i;
+                    buttonList.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                        @Override
+                        public void handle(MouseEvent mouseEvent) {
+                            getFieldHover(myCharacters.get(finalI),fieldMy);
+                        }
+                    });
+                }
             }
         });
     }
@@ -196,7 +234,6 @@ public class GameController {
                         }
 
                         if(!(usedCharacters.contains(character)) && turn) {
-                            clicked = true;
                             fail(null);
                             for (int i = 0; i < block.length; i++) {
                                 int j = 0;
@@ -205,14 +242,17 @@ public class GameController {
                                 int y = cell1.getCellY() + block[i][j];
                                 if (x >= 0 && x < Constants.FIELD_WIDTH && y >= 0 && y < Constants.FIELD_HEIGHT) {
                                     coordX.add(x);
+                                    System.out.println(x + " " + y);
                                     coordY.add(y);
                                     Cell c = fieldMy.getCell(x, y);
                                     c.setFill(Color.GRAY);
+                                    c.setOnMouseEntered(null);
+                                    c.setOnMouseExited(null);
                                 }
                             }
 
                             usedCharacters.add(character);
-                            RequestMessage requestMessage = RequestMessage.createNormalMoveMessage(Math.toIntExact(character.getId()), listToArray(coordX), listToArray(coordY));
+                            RequestMessage requestMessage = RequestMessage.createNormalMoveMessage(usedCharacters.indexOf(character), listToArray(coordY), listToArray(coordX));
                             client.sendMessage(requestMessage);
                         }
                     }

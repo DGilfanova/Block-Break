@@ -22,6 +22,7 @@ public class ResponseMessageHandler implements Runnable {
 
     private GameController gameController;
     private WaitingController waitingController;
+    private FinalController finalController;
 
     private static ResponseMessageHandler instance;
 
@@ -50,20 +51,20 @@ public class ResponseMessageHandler implements Runnable {
                                 break;
                             }
                             case (Constants.START_GAME):{
+                                gameController.handleMessageForTurn(responseMessage);
+                                break;
+                            }
+                            case (Constants.GAME_STATE):{
                                 if (init) {
                                     init = false;
-                                    gameController.handleMessageForTurn(responseMessage);
+                                    gameController.handleMessageForGameStart(responseMessage);
                                 } else {
                                     gameController.handleMessageForGameState(responseMessage);
                                 }
                                 break;
                             }
-                            case (Constants.GAME_STATE):{
-                                gameController.handleMessageForGameStart(responseMessage);
-                                break;
-                            }
                             case (Constants.FINISH):{
-                                FinalController.handleMessage(responseMessage);
+                                finalController.handleMessage(responseMessage);
                                 break;
                             }
                         }

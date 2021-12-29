@@ -29,7 +29,12 @@
                         <Font size="38.0" />
                      </font>
                   </Label>
-                  <Label fx:id="pointLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="34.0" prefWidth="124.0" text="*балл*" textFill="WHITE">
+                  <Label fx:id="pointsMy" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="34.0" prefWidth="124.0" text="0" textFill="WHITE">
+                     <font>
+                        <Font size="26.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="pointsOpponent" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="209.0" prefHeight="34.0" prefWidth="124.0" text="0" textFill="WHITE">
                      <font>
                         <Font size="26.0" />
                      </font>
