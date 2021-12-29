@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Game {
 
     private ArrayList<AbstractCharacter> characters = new ArrayList<>();
+    private ArrayList<AbstractCharacter> chosenCharacters = new ArrayList<>();
 
     private int[][] startBlock;
 

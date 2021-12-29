@@ -29,4 +29,6 @@ public class Constants {
 
     public final static int PLAYER_TURN_ON = 1;
     public final static int PLAYER_TURN_OFF = 2;
+
+    public final static int MAXIMUM_CELLS_HOVER = 5;
 }

@@ -16,6 +16,6 @@ public abstract class AbstractCharacter {
     String specialSkillImage;
     String damageImage;
     String normalSkillImage;
+    int[][] cells;
 
-    public abstract Map<Integer, Integer> processBlock(Integer x, Integer y);
 }

@@ -29,7 +29,7 @@ public class CharacterSelectionController {
     @FXML
     public ImageView damageImage, specialSkillImage, normalSkillImage;
 
-    private HashSet<Integer> characters = new HashSet<>();
+    public static HashSet<Integer> characters = new HashSet<>();
 
     private static SocketClient client;
     public static Game game;

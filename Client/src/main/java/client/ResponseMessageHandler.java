@@ -34,6 +34,7 @@ public class ResponseMessageHandler implements Runnable {
     public void run() {
         try {
             List<Byte> list = new ArrayList<>();
+            boolean init = true;
             while (true) {
                 int n = is.read();
                 if (n != -1) {
@@ -41,7 +42,6 @@ public class ResponseMessageHandler implements Runnable {
                     try {
                         ResponseMessage responseMessage = ResponseMessage.readMessage(list);
                         System.out.println(responseMessage);
-                        boolean init = true;
 
                         int messageType = responseMessage.getMessageType();
                         switch (messageType) {
@@ -50,16 +50,16 @@ public class ResponseMessageHandler implements Runnable {
                                 break;
                             }
                             case (Constants.START_GAME):{
-                                gameController.handleMessageForTurn(responseMessage);
-                                break;
-                            }
-                            case (Constants.GAME_STATE):{
                                 if (init) {
                                     init = false;
-                                    gameController.handleMessageForGameStart(responseMessage);
+                                    gameController.handleMessageForTurn(responseMessage);
                                 } else {
                                     gameController.handleMessageForGameState(responseMessage);
                                 }
+                                break;
+                            }
+                            case (Constants.GAME_STATE):{
+                                gameController.handleMessageForGameStart(responseMessage);
                                 break;
                             }
                             case (Constants.FINISH):{

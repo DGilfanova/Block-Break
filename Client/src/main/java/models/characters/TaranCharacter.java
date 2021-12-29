@@ -11,7 +11,6 @@ import java.util.Map;
 @Setter
 @EqualsAndHashCode
 public class TaranCharacter extends AbstractCharacter {
-    private Map<Integer,Integer> cells = new HashMap<>();
 
     public TaranCharacter() {
         id = 5L;
@@ -22,13 +21,7 @@ public class TaranCharacter extends AbstractCharacter {
         imagePath = "/images/characters/taran.png";
         damageImage = "/images/damages/taran.png";
         normalSkillImage = "/images/skills/corrosive_haze.png";
+        cells = new int[][]{{0,0},{-1,0},{1,0},{0,1},{0,2}};
     }
 
-    @Override
-    public Map<Integer, Integer> processBlock(Integer x, Integer y) {
-        cells.put(1,1);
-        cells.put(2,1);
-        cells.put(2,2);
-        return cells;
-    }
 }

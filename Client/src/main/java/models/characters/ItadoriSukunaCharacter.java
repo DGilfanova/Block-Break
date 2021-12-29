@@ -12,8 +12,6 @@ import java.util.Map;
 @EqualsAndHashCode
 public class ItadoriSukunaCharacter extends AbstractCharacter {
 
-    private Map<Integer,Integer> cells = new HashMap<>();
-
     public ItadoriSukunaCharacter() {
         id = 2L;
         name = "Itadori Sukuna";
@@ -23,14 +21,7 @@ public class ItadoriSukunaCharacter extends AbstractCharacter {
         imagePath = "/images/characters/itadoriSukuna.png";
         damageImage = "/images/damages/itadoriSukuna.PNG";
         normalSkillImage = "/images/skills/skewer.png";
+        cells = new int[][]{{0, 0}, {0, 1}, {1, 0}, {1, 1}};
     }
 
-    @Override
-    public Map<Integer, Integer> processBlock(Integer x, Integer y) {
-        cells.put(1,1);
-        cells.put(1,2);
-        cells.put(1,3);
-        cells.put(1,4);
-        return cells;
-    }
 }

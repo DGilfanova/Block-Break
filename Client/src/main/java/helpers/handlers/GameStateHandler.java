@@ -2,6 +2,11 @@ package helpers.handlers;
 
 import exceptions.WrongResponseMessageException;
 import helpers.constants.Constants;
+import models.Game;
+import models.characters.AbstractCharacter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameStateHandler {
 
@@ -15,6 +20,39 @@ public class GameStateHandler {
         } else {
             throw new WrongResponseMessageException("Wrong server parameter");
         }
+    }
+
+    public static ArrayList<AbstractCharacter> processCharacters(int [][] x, Game game) {
+        List<Long> charIds = new ArrayList<>();
+        for (int i = 0; i < x.length; i++) {
+            charIds.add((long) x[i][0]);
+        }
+
+        List<AbstractCharacter> characters = game.getCharacters();
+        ArrayList<AbstractCharacter> chosenCharacters = new ArrayList<>();
+        for (Long c: charIds) {
+            for (AbstractCharacter character: characters) {
+                if (character.getId() == c) {
+                    chosenCharacters.add(character);
+                }
+            }
+        }
+
+        return chosenCharacters;
+    }
+
+    public static ArrayList<AbstractCharacter> processStartCharacters(int [] x, Game game) {
+        List<AbstractCharacter> characters = game.getCharacters();
+        ArrayList<AbstractCharacter> chosenCharacters = new ArrayList<>();
+        for (int i = 0; i < x.length; i++) {
+            for (AbstractCharacter character: characters) {
+                if (character.getId() == x[i]) {
+                    chosenCharacters.add(character);
+                }
+            }
+        }
+
+        return chosenCharacters;
     }
 
     public static void main(String[] args) {

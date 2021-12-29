@@ -18,4 +18,11 @@ public class Cell extends Rectangle {
         this.x = x;
         this.y = y;
     }
+
+    public int getCellX(){
+        return x;
+    }
+    public int getCellY(){
+        return y;
+    }
 }

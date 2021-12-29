@@ -5,8 +5,6 @@ import java.util.Map;
 
 public class GojoCharacter extends AbstractCharacter {
 
-    private Map<Integer,Integer> cells = new HashMap<>();
-
     public GojoCharacter() {
         id = 6L;
         name = "Gojo Satoru";
@@ -14,13 +12,8 @@ public class GojoCharacter extends AbstractCharacter {
         specialSkill = "Lightning bolt";
         specialSkillImage = "/images/skills/lightning_bolt.png";
         imagePath = "/images/characters/gojo.png";
-        //изменить
-        damageImage = "/images/damages/itadoriSukuna.PNG";
+        damageImage = "/images/damages/gojo.PNG";
         normalSkillImage = "/images/skills/skewer.png";
-    }
-
-    @Override
-    public Map<Integer, Integer> processBlock(Integer x, Integer y) {
-        return null;
+        cells = new int[][]{{0,0},{1,0},{2,0},{3,0},{4,0}};
     }
 }
