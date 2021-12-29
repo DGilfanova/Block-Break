@@ -1,6 +1,5 @@
 package models.elements;
 
-import helpers.constants.Constants;
 import javafx.scene.Parent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -11,7 +10,6 @@ import models.Game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 @Getter
 @Setter
