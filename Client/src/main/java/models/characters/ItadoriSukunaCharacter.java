@@ -14,7 +14,7 @@ public class ItadoriSukunaCharacter extends AbstractCharacter {
 
     public ItadoriSukunaCharacter() {
         id = 2L;
-        name = "Itadori Sukuna";
+        name = "Itadori Sukuna (80)";
         normalSkill = "Skewer";
         specialSkill = "Lightning bolt";
         specialSkillImage = "/images/skills/lightning_bolt.png";

@@ -7,7 +7,7 @@ public class GojoCharacter extends AbstractCharacter {
 
     public GojoCharacter() {
         id = 6L;
-        name = "Gojo Satoru";
+        name = "Gojo Satoru (60)";
         normalSkill = "Skewer";
         specialSkill = "Lightning bolt";
         specialSkillImage = "/images/skills/lightning_bolt.png";

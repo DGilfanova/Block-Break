@@ -14,7 +14,7 @@ public class TaranCharacter extends AbstractCharacter {
 
     public TaranCharacter() {
         id = 5L;
-        name = "Taran";
+        name = "Taran (120)";
         normalSkill = "Corrosive haze";
         specialSkill = "Vampiric hit";
         specialSkillImage = "/images/skills/vampiric_aura.png";

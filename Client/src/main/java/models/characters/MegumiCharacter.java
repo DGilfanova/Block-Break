@@ -14,7 +14,7 @@ public class MegumiCharacter extends AbstractCharacter {
 
     public MegumiCharacter() {
         id = 3L;
-        name = "Megumi";
+        name = "Megumi (150)";
         normalSkill = "God Strength";
         specialSkill = "Dark Pact";
         specialSkillImage = "/images/skills/dark_pact.png";

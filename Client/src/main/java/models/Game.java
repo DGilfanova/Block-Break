@@ -15,7 +15,7 @@ public class Game {
     private ArrayList<AbstractCharacter> characters = new ArrayList<>();
     private ArrayList<AbstractCharacter> chosenCharacters = new ArrayList<>();
 
-    Map<Integer, Integer> colors = new HashMap<>();
+    HashMap<Integer, Integer> colors = new HashMap<>();
 
     private int[][] startBlock;
     private int[][] currentBlock;

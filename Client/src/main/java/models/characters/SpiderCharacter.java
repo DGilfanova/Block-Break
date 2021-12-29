@@ -14,7 +14,7 @@ public class SpiderCharacter extends AbstractCharacter {
 
     public SpiderCharacter() {
         id = 4L;
-        name = "Spider-Man";
+        name = "Spider-Man (70)";
         normalSkill = "Dispersion";
         specialSkill = "Refraction";
         specialSkillImage = "/images/skills/refraction.png";

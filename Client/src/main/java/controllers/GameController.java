@@ -33,7 +33,7 @@ public class GameController {
     public Pane gameField2;
 
     @FXML
-    public Label errorLabel,pointsMy,movingLabel, pointsOpponent;
+    public Label errorLabel,pointsMy,movingLabel, pointsOpponent, hpLabel;
 
     @FXML
     public Button myChar1,myChar2,myChar3;
@@ -50,6 +50,15 @@ public class GameController {
 
     public static GameController getInstance() {
         return instance;
+    }
+
+    public void initialize() {
+        instance = this;
+
+        client = SocketClient.getInstance();
+        responseMessageHandler = ResponseMessageHandler.getInstance();
+        responseMessageHandler.setGameController(instance);
+        game = CharacterSelectionController.game;
     }
 
     public void handleMessageForGameStart(ResponseMessage responseMessage) {
@@ -75,6 +84,8 @@ public class GameController {
                 }
                 myCharacters = GameStateHandler.processStartCharacters(chars,game);
 
+                int [][] hp = responseMessage.getBlockStateMy();
+
                 buttonList.add(myChar1);
                 buttonList.add(myChar2);
                 buttonList.add(myChar3);
@@ -86,7 +97,7 @@ public class GameController {
                     buttonList.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            getFieldHover(myCharacters.get(finalI),fieldMy);
+                            getFieldHover(myCharacters.get(finalI),fieldMy, hp, a);
                         }
                     });
                 }
@@ -113,25 +124,9 @@ public class GameController {
 
                 //перерисовка
                 int [][] newMyBlock = GameStateHandler.processBlockState(responseMessage.getBlockStateMy(), game.getStartBlock());
-                for (int i = 0; i < game.getStartBlock().length; i++) {
-                    for (int j = 0; j < game.getStartBlock().length; j++) {
-                        System.out.print(game.getStartBlock()[i][j] + " ");
-                    }
-                    System.out.println();
-                }
-                System.out.println();
-                for (int i = 0; i < responseMessage.getBlockStateMy().length; i++) {
-                        System.out.println(responseMessage.getBlockStateMy()[i][0] + " " + responseMessage.getBlockStateMy()[i][1]);
-                }
-                System.out.println();
-
-                for (int i = 0; i < newMyBlock.length; i++) {
-                    for (int j = 0; j < newMyBlock.length; j++) {
-                        System.out.print(newMyBlock[i][j] + " ");
-                    }
-                    System.out.println();
-                }
                 int [][] newOppositeBlock = GameStateHandler.processBlockState(responseMessage.getBlockStateOpponent(), game.getStartBlock());
+
+                int [][] hp = responseMessage.getBlockStateMy();
 
                 Field fieldMy = new Field(newMyBlock, Constants.BROKEN_COLOR, game);
                 Field fieldOpposite = new Field(newOppositeBlock, Constants.BROKEN_COLOR, game);
@@ -144,7 +139,7 @@ public class GameController {
                     buttonList.get(i).setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
-                            getFieldHover(myCharacters.get(finalI),fieldMy);
+                            getFieldHover(myCharacters.get(finalI),fieldMy, hp, newMyBlock);
                         }
                     });
                 }
@@ -158,27 +153,16 @@ public class GameController {
             public void run() {
                 if (responseMessage.getPlayer() == Constants.PLAYER_TURN_ON) {
                     turn = true;
-                    movingLabel.setText("Ваш ход");
+                    movingLabel.setText("Ваш");
                 } else {
                     turn = false;
-                    movingLabel.setText("Ход противника");
+                    movingLabel.setText("противника");
                 }
             }
         });
     }
 
-    public void initialize() {
-        instance = this;
-
-        client = SocketClient.getInstance();
-        responseMessageHandler = ResponseMessageHandler.getInstance();
-        responseMessageHandler.setGameController(instance);
-        game = CharacterSelectionController.game;
-
-    }
-
-
-    public void getFieldHover(AbstractCharacter character, Field fieldMy){
+    public void getFieldHover(AbstractCharacter character, Field fieldMy, int[][] hp, int [][] newMyBlock){
         for(int i=0;i<Constants.FIELD_WIDTH;i++) {
             for (int j=0; j<Constants.FIELD_HEIGHT; j++) {
                 Cell cell1 = fieldMy.getCell(i, j);
@@ -187,15 +171,25 @@ public class GameController {
                 cell1.setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
+                        int cellX = cell1.getCellX();
+                        int cellY = cell1.getCellY();
+
                         for (int i = 0; i < block.length; i++) {
                             int j = 0;
-                            int x = cell1.getCellX() + block[i][j];
+                            int x = cellX + block[i][j];
                             j++;
-                            int y = cell1.getCellY() + block[i][j];
+                            int y = cellY + block[i][j];
                             if (x >= 0 && x < Constants.FIELD_WIDTH && y >= 0 && y < Constants.FIELD_HEIGHT) {
                                 Cell c = fieldMy.getCell(x, y);
                                 colors[i] = (Color) c.getFill();
                                 c.setFill(Color.GRAY);
+                            }
+                        }
+
+                        for (int i = 0; i < hp.length; i++) {
+                            if (hp[i][0] == newMyBlock[cellY][cellX]) {
+                                hpLabel.setText(String.valueOf(hp[i][1]));
+                                break;
                             }
                         }
                     }
@@ -214,6 +208,8 @@ public class GameController {
                                 c.setFill(colors[i]);
                             }
                         }
+
+                        hpLabel.setText(null);
                     }
                 });
                 cell1.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -242,7 +238,6 @@ public class GameController {
                                 int y = cell1.getCellY() + block[i][j];
                                 if (x >= 0 && x < Constants.FIELD_WIDTH && y >= 0 && y < Constants.FIELD_HEIGHT) {
                                     coordX.add(x);
-                                    System.out.println(x + " " + y);
                                     coordY.add(y);
                                     Cell c = fieldMy.getCell(x, y);
                                     c.setFill(Color.GRAY);

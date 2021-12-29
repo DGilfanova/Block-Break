@@ -33,7 +33,7 @@ public class Field extends Parent {
 
     public void createBoard(int[][]array, Game game) {
         ArrayList<Integer> blockSet = new ArrayList<>();
-        Map<Integer, Integer> colors = new HashMap<>();
+        HashMap<Integer, Integer> colors = new HashMap<>();
 
         for (int y = 0; y < array.length; y++) {
             HBox row = new HBox();
@@ -42,6 +42,7 @@ public class Field extends Parent {
                 if (!blockSet.contains(array[y][x])) {
                     blockSet.add(array[y][x]);
                 }
+
                 cell.setFill(colorList.get(blockSet.indexOf(array[y][x])));
                 colors.put(array[y][x], blockSet.indexOf(array[y][x]));
                 cell.setStrokeWidth(0.5);
@@ -51,6 +52,7 @@ public class Field extends Parent {
             rows.getChildren().add(row);
         }
         game.setColors(colors);
+
         getChildren().add(rows);
     }
 
@@ -68,7 +70,7 @@ public class Field extends Parent {
                 if (array[y][x] == 0) {
                     cell.setFill(color);
                 } else {
-                    cell.setFill(colorList.get(blockSet.indexOf(array[y][x])));
+                    cell.setFill(colorList.get(game.getColors().get(array[y][x])));
                 }
                 cell.setStrokeWidth(0.5);
                 cell.setStroke(Color.BLACK);

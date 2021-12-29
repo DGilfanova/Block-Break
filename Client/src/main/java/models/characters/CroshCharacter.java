@@ -15,7 +15,7 @@ public class CroshCharacter extends AbstractCharacter {
 
     public CroshCharacter() {
         id = 1L;
-        name = "Crosh";
+        name = "Crosh (30)";
         normalSkill = "Fire Shield";
         specialSkill = "Heavenly Grace";
         specialSkillImage = "/images/skills/heavenly_grace.png";
